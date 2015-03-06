@@ -1,0 +1,56 @@
+<?php
+$title = 'ToYouDo';
+$this->placeholder('pageTitle')->set($title);
+?>
+<div class="row">
+    <div class="col-md-3">
+        <?php $partial = array('to-you-do/navigation/main.phtml', 'default') ?>
+        <?php $this->navigation('navigation')->menu()->setPartial($partial) ?>
+        <?php echo $this->navigation('navigation')->menu()->render() ?>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        ToYouDo - Aufgaben!
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                        <?php if ($toyoudoLists->count() > 0) : ?>
+                        <?php /* @var $list \ToYouDo\Entity\TodoList */  ?>
+                            <?php foreach ($toyoudoLists as $list) : ?>
+                            <a href="<?= $this->url('toyoudo-list', array('action' => 'view', 'id' => $list->getId())) ?>">
+                                <div class="col-md-4 toyoudo-list-box">
+                                    <div class="toyoudo-list">
+                                        <div class="toyoudo-list-content">
+                                            <?php if ($list->getStatus() == 0) : ?>
+                                            <span class="toyoudo-list-unchecked glyphicon glyphicon-unchecked"></span>
+                                            <?php else: ?>
+                                            <span class="toyoudo-list-checked glyphicon glyphicon-check"></span>
+                                            <?php endif; ?>
+                                            <br/>
+                                            <span class="toyoudo-list-title"><?= $list->getName() ?></span>
+                                            <br/>
+                                            <span>Mit besten Grüßen, </span>
+                                            <br/>
+                                            <span class="toyoudo-list-friend-name"><?= $list->getFriendName() ?></span>
+                                            <br/>
+                                            <span class="toyoudo-list-deadline">(Deadline: <?= $list->getDeadline() ?>)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="col-md-12">
+                                Sie habe keine Aufgaben! Füße hoch und abwarten...
+                            </div>
+                        <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

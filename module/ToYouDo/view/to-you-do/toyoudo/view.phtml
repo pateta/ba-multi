@@ -1,0 +1,43 @@
+<?php
+$title = 'ToYouDo';
+$this->placeholder('pageTitle')->set($title);
+?>
+<div class="row">
+    <div class="col-md-3">
+        <?php $partial = array('to-you-do/navigation/main.phtml', 'default') ?>
+        <?php $this->navigation('navigation')->menu()->setPartial($partial) ?>
+        <?php echo $this->navigation('navigation')->menu()->render() ?>
+    </div>
+    <div class="col-md-9">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                ToYouDo - <?= $list->getName() ?> - Deadline: <?= $list->getDeadline() ?>
+                <?php if ($list->getStatus() == 0) : ?>
+                <a class="pull-right" href="<?= $this->url('list', array('action' => 'check-list', 'id' => $list->getId())) ?>"><span class="glyphicon glyphicon-unchecked"></span></a>
+                <?php else: ?>
+                <a class="pull-right" href="<?= $this->url('list', array('action' => 'uncheck-list', 'id' => $list->getId())) ?>"><span class="glyphicon glyphicon-check"></span></a>
+                <?php endif; ?>
+            </div>
+            <div class="panel-body<?= ($list->getStatus() == 1) ? " task-done-panel" : "" ?>">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="toyoudo-view-top">
+                        </div>
+                        <div class="toyoudo-view-body">
+                            <?php if ($items->count() > 0) : ?>
+                            <ul>
+                                <?php foreach ($items as $item) : ?>
+                                <li style="line-height: 25px;"><?= $item->getContent() ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <?php else : ?>
+                            Zur Zeit ist nichts zu tun!
+                            <?php endif; ?>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

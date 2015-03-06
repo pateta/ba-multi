@@ -1,0 +1,133 @@
+<?php
+$title = 'Freunde';
+$this->placeholder('pageTitle')->set($title);
+?>
+<div class="row">
+    <div class="col-md-3">
+        <?php $partial = array('to-you-do/navigation/main.phtml', 'default') ?>
+        <?php $this->navigation('navigation')->menu()->setPartial($partial) ?>
+        <?php echo $this->navigation('navigation')->menu()->render() ?>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <a class="btn btn-warning btn-block" href="<?php echo $this->url('friend', array('action' => 'search')) ?>">Freund einladen</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">Freunde</div>
+                    <div class="panel-body">
+                        <?php if ($friends->count() > 0) : ?>
+                        <div class="table">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nickname</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php /* @var $friend \ToYouDo\Entity\Friend */ ?>
+                                    <?php foreach ($friends as $friend) : ?>
+                                    <tr>
+                                        <td><?= $friend->getFriend_username() ?></td>
+                                        <td class="text-right">
+                                            <a href="<?= $this->url('friend', array('action' => 'revoke-friendship', 'id' => $friend->getId())) ?>"><span class="glyphicon glyphicon-remove">&nbsp;</span></a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php else : ?>
+                        <p>Sie haben keine Freunde. <a href="<?= $this->url('friend', array('action' => 'search')) ?>">Suchen</a> Sie sich doch welche!</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">Ausstehende Bestätigungen</div>
+                    <div class="panel-body">
+                        <?php if ($invitations->count() > 0) : ?>
+                        <div class="table">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nickname</th>
+                                        <th class="text-right">Bestätigung</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php /* @var $invitation \ToYouDo\Entity\Friend */ ?>
+                                    <?php foreach ($invitations as $invitation) : ?>
+                                    <tr>
+                                        <td><?= $invitation->getFriend_username() ?></td>
+                                        <td class="text-right">
+                                            <a href="<?= $this->url('friend', array('action' => 'accept-friendship', 'id' => $invitation->getId())) ?>"><span class="glyphicon glyphicon-ok">&nbsp;</span></a>
+                                            <a href="<?= $this->url('friend', array('action' => 'reject-friendship', 'id' => $invitation->getId())) ?>"><span class="glyphicon glyphicon-remove">&nbsp;</span></a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php else : ?>
+                        <p>Sie haben keine ausstehende Bestätigungen.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">Ausgehende Einladungen</div>
+                    <div class="panel-body">
+                        <?php if ($pending->count() > 0) : ?>
+                        <div class="table">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nickname</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php /* @var $friend \ToYouDo\Entity\Friend */ ?>
+                                    <?php foreach ($pending as $friend) : ?>
+                                    <?php
+                                        switch ($friend->getAccepted()) {
+                                            case 0:
+                                                $accepted = 'ausstehend';
+                                                break;
+                                            case 1:
+                                                $accepted = 'bestätigt';
+                                                break;
+                                            case 2:
+                                                $accepted = 'abgelehnt';
+                                                break;
+                                            default:
+                                                $accepted = 'ausstehend';
+                                                break;
+                                        }
+                                    ?>
+                                    <tr>
+                                        <td><?= $friend->getFriend_username() ?></td>
+                                        <td><?= $accepted ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php else : ?>
+                        <p>Sie haben keine ausgehende Einladungen.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

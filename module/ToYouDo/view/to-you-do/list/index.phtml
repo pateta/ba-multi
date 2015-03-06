@@ -1,0 +1,54 @@
+<?php
+$title = 'Listen';
+$this->placeholder('pageTitle')->set($title);
+?>
+<div class="row">
+    <div class="col-md-3">
+        <?php $partial = array('to-you-do/navigation/main.phtml', 'default') ?>
+        <?php $this->navigation('navigation')->menu()->setPartial($partial) ?>
+        <?php echo $this->navigation('navigation')->menu()->render() ?>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        ToYouDo - Selbsterstellte Listen
+                        <a class="pull-right" href="<?= $this->url('list', array('action' => 'add')) ?>"><span class="glyphicon glyphicon-plus"></span></a>
+                    </div>
+                    <div class="panel-body">
+                        <?php if ($toyoudoLists->count() > 0) : ?>
+                        <div class="table">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Listname</th>
+                                        <th>Erstellt für</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php /* @var $list \ToYouDo\Entity\TodoList */  ?>
+                                    <?php foreach ($toyoudoLists as $list) : ?>
+                                    <tr>
+                                        <td><?= $list->getName() ?></td>
+                                        <td><?= $list->getFriendName() ?></td>
+                                        <td class="text-right">
+                                            <a href="<?= $this->url('list', array('action' => 'view', 'id' => $list->getId())) ?>"><span class="glyphicon glyphicon-eye-open">&nbsp;</span></a>
+                                            <a href="<?= $this->url('list', array('action' => 'edit', 'id' => $list->getId())) ?>"><span class="glyphicon glyphicon-pencil">&nbsp;</span></a>
+                                            <a href="<?= $this->url('list', array('action' => 'delete', 'id' => $list->getId())) ?>"><span class="glyphicon glyphicon-remove">&nbsp;</span></a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php else: ?>
+                        Sie haben keine ToYouDo Listen. Sie können aber eine <a href="<?= $this->url('list', array('action' => 'add')) ?>">Erstellen</a>!
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

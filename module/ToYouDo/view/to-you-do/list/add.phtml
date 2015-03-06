@@ -1,0 +1,55 @@
+<?php
+$title = 'Listen';
+$this->placeholder('pageTitle')->set($title);
+?>
+<div class="row">
+    <div class="col-md-3">
+        <?php $partial = array('to-you-do/navigation/main.phtml', 'default') ?>
+        <?php $this->navigation('navigation')->menu()->setPartial($partial) ?>
+        <?php echo $this->navigation('navigation')->menu()->render() ?>
+    </div>
+    <div class="col-md-9">
+        <div class="panel panel-warning">
+            <div class="panel-heading"><span class="glyphicon glyphicon-plus"></span>&nbsp;ToYouDo - Liste Erstellen</div>
+            <div class="panel-body">
+                <?php if (isset($this->form)) : ?>
+                    <?php $form = $this->form; ?>
+                    <?php $form->setAttribute('class', 'form-horizontal'); ?>
+                    <?php $form->setAttribute('id', 'form-search'); ?>
+                    <?php $form->prepare(); ?>
+                    <?= $this->form()->openTag($form) ?>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <?= $this->formLabel($form->get('name')) ?>
+                                <?= $this->formElement($form->get('name')) ?>
+                                <?= $this->formElementErrors($form->get('name')) ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-7">
+                                <?= $this->formLabel($form->get('deadline')) ?>
+                                <?= $this->formElement($form->get('deadline')) ?>
+                                <?= $this->formElementErrors($form->get('deadline')) ?>
+                            </div>
+                            <div class="col-md-5">
+                                <?= $this->formLabel($form->get('friendId')) ?>
+                                <?= $this->formElement($form->get('friendId')) ?>
+                                <?= $this->formElementErrors($form->get('friendId')) ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            
+                            <div class="col-md-12">
+                                <?= $this->formElement($form->get('submit')) ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <?= $this->form()->closeTag() ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<?php
+$title = 'Listen';
+$this->placeholder('pageTitle')->set($title);
+?>
+<div class="row">
+    <div class="col-md-3">
+        <?php $partial = array('to-you-do/navigation/main.phtml', 'default') ?>
+        <?php $this->navigation('navigation')->menu()->setPartial($partial) ?>
+        <?php echo $this->navigation('navigation')->menu()->render() ?>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        ToYouDo - Aufgabe Hinzufügen
+                        <a class="pull-right" href="<?= $this->url('list', array('action' => 'view', 'id' => $listId)) ?>"><span class="glyphicon glyphicon-arrow-left">&nbsp;Zurück</span></a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <?php if (isset($this->form)) : ?>
+                                    <?php $form = $this->form; ?>
+                                    <?php $form->setAttribute('class', 'form-horizontal'); ?>
+                                    <?php $form->setAttribute('id', 'form-search'); ?>
+                                    <?php $form->prepare(); ?>
+                                    <?= $this->form()->openTag($form) ?>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <?= $this->formLabel($form->get('content')) ?>
+                                                <?= $this->formElement($form->get('content')) ?>
+                                                <?= $this->formElementErrors($form->get('content')) ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+
+                                            <div class="col-md-12">
+                                                <?= $this->formElement($form->get('submit')) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <?= $this->form()->closeTag() ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

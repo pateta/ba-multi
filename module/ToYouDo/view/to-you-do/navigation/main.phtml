@@ -1,0 +1,14 @@
+<div class="list-group">
+<?php foreach ($this->container as $page) { ?>
+    <?php if (!$page->isVisible() || !$this->navigation()->accept($page)) { continue; } ?>
+    <?php if ($page->getActive(false)) : ?>
+        <a class="list-group-item list-group-item-warning" href="<?= $page->getHref() ?>">
+            <?= $page->getLabel() ?>
+        </a>
+    <?php else : ?>
+        <a class="list-group-item list-group-item" href="<?= $page->getHref() ?>">
+            <?= $page->getLabel() ?>
+        </a>
+    <?php endif; ?>
+<?php } ?>
+</div>

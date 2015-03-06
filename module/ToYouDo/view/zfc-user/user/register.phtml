@@ -1,0 +1,81 @@
+<?php
+if (!$this->enableRegistration) {
+    echo $this->translate('Registration is disabled');
+    return;
+}
+
+    $title = 'Registrieren';
+    $this->placeholder('pageTitle')->set($title);
+
+    $form = $this->registerForm;
+    $form->prepare();
+    $form->setAttribute('action', $this->url('zfcuser/register'));
+    $form->setAttribute('method', 'post');
+
+    $username = $form->get('username');
+    $username->setAttribute('class', 'form-control');
+
+    $email = $form->get('email');
+    $email->setAttribute('class', 'form-control');
+
+    $password = $form->get('password');
+    $password->setAttribute('class', 'form-control');
+
+    $passwordVerify = $form->get('passwordVerify');
+    $passwordVerify->setAttribute('class', 'form-control');
+    
+    $submit = $form->get('submit');
+    $submit->setAttribute('class', 'btn btn-warning btn-block');
+?>
+<div class="row">
+<?php echo $this->form()->openTag($form) ?>
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="form-group row">
+                <div class="col-md-4 col-md-offset-4">
+                    <?php echo $this->formLabel($username) ?>
+                    <?php echo $this->formInput($username) ?>
+                    <?php echo $this->formElementErrors($username) ?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-md-offset-4">
+                    <?php echo $this->formLabel($email) ?>
+                    <?php echo $this->formInput($email) ?>
+                    <?php echo $this->formElementErrors($email) ?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-md-offset-4">
+                    <?php echo $this->formLabel($password) ?>
+                    <?php echo $this->formInput($password) ?>
+                    <?php echo $this->formElementErrors($password) ?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-md-offset-4">
+                    <?php echo $this->formLabel($passwordVerify) ?>
+                    <?php echo $this->formInput($passwordVerify) ?>
+                    <?php echo $this->formElementErrors($passwordVerify) ?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-md-offset-4">
+                    <?php echo $this->formButton($submit) ?>
+                    <?php if ($this->redirect): ?>
+                        <input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" />
+                    <?php endif ?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="form-group row">
+                    <div class="col-md-4 col-md-offset-4">
+                        Bereits registriert? <a href="<?php echo $this->url('zfcuser/login') . ($this->redirect ? '?redirect='.$this->redirect : '') ?>">Hier gehts zum Login!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<?php echo $this->form()->closeTag() ?>

@@ -1,0 +1,56 @@
+<?php
+    $title = 'Anmeldung';
+    $this->placeholder('pageTitle')->set($title);
+
+    $form = $this->loginForm;
+    $form->prepare();
+    $form->setAttribute('action', $this->url('zfcuser/login'));
+    $form->setAttribute('method', 'post');
+    
+    $submit = $form->get('submit');
+    $submit->setAttribute('class', 'btn btn-warning btn-block');
+    
+    $identity = $form->get('identity');
+    $identity->setAttribute('class', 'form-control');
+    $identity->setAttribute('placeholder', $identity->getLabel());
+    
+    $credential = $form->get('credential');
+    $credential->setAttribute('class', 'form-control');
+    $credential->setAttribute('placeholder', $credential->getLabel());
+?>
+<div class="row">
+    <?php echo $this->form()->openTag($form) ?>
+    <?php echo $this->formElementErrors($form->get('identity')) ?>
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="form-group row">
+                <div class="col-md-4 col-md-offset-4">
+                    <?php echo $this->formInput($identity) ?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-md-offset-4">
+                    <?php echo $this->formInput($credential) ?>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4 col-md-offset-4">
+                    <?php echo $this->formButton($submit) ?>
+                    <?php if ($this->redirect): ?>
+                        <input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" />
+                    <?php endif ?>
+                </div>
+            </div>
+            <?php if ($this->enableRegistration) : ?>
+            <div class="form-group row">
+                <div class="col-md-4 col-md-offset-4">
+                    Noch kein Zugang? <a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->redirect : '') ?>">Jetzt registrieren!</a>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php echo $this->form()->closeTag() ?>
+</div>
+
+

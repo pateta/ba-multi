@@ -1,0 +1,44 @@
+<?php
+$title = 'Startseite';
+$this->placeholder('pageTitle')->set($title);
+?>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-warning home-panel">
+            <a href="<?= $this->url('project') ?>">
+                <div class="panel-body home-block">
+                    <h2>Das Projekt</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-warning home-panel">
+            <a href="<?= $this->url('toyoudo-list') ?>">
+                <div class="panel-body home-block">
+                    <h2>ToYouDo</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-warning home-panel">
+            <a href="<?= $this->url('friend') ?>">
+                <div class="panel-body home-block">
+                    <h2>Freunde</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-warning home-panel">
+            <a href="<?= $this->url('list') ?>">
+                <div class="panel-body home-block">
+                    <h2>Listen</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

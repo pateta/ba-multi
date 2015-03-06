@@ -1,0 +1,26 @@
+<?php
+$title = 'Startseite';
+$this->placeholder('pageTitle')->set($title);
+?>
+<div class="row">
+    <div class="col-md-3">
+        <?php $partial = array('to-you-do/navigation/main.phtml', 'default') ?>
+        <?php $this->navigation('navigation')->menu()->setPartial($partial) ?>
+        <?php echo $this->navigation('navigation')->menu()->render() ?>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">Das Projekt</div>
+                    <div class="panel-body">
+                        <p>Das ist die <i><b>multi page application</b></i>, die im Rahmen einer Bachelorarbeit entwickelt wurde. Ziel ist der Vergleich mit einer <i><b>single page application</b></i>.</p>
+                        <p>Hauptmerkmal dieser Applikation ist, dass die angeforderten Inhalte beim jedem Aufruf der Applikation neu geladen werden.</p>
+                        <p>Die Applikation wurde mit dem Zend Framework 2 implementiert.</p>
+                        <p>Entwickler: Walter Matias Thomsen - 15.12.2014</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
